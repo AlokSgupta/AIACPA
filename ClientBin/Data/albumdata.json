@@ -1,0 +1,23 @@
+{"AIACPAALBUMS"  :  "true",
+	"results" :  
+	[
+		{"ALBUM" : "Dinner 2006" , "IMGCOUNT" : "6", "AlbumList" : 
+			[  
+				{"IMGSRC" : "My Albums/Dinner 2006/page00.jpg", "TITLE" : "Annual Dinner 2006", "DATECR" : "12/12/2006", "IMGID" : "1" } ,
+				{"IMGSRC" : "My Albums/Dinner 2006/page01.jpg", "TITLE" : "Annual Dinner 2006", "DATECR" : "12/12/2006", "IMGID" : "2" } ,
+				{"IMGSRC" : "My Albums/Dinner 2006/page02.jpg", "TITLE" : "Annual Dinner 2006", "DATECR" : "12/12/2006", "IMGID" : "3" } ,
+				{"IMGSRC" : "My Albums/Dinner 2006/page03.jpg", "TITLE" : "Annual Dinner 2006", "DATECR" : "12/12/2006", "IMGID" : "4" } ,
+				{"IMGSRC" : "My Albums/Dinner 2006/page04.jpg", "TITLE" : "Annual Dinner 2006", "DATECR" : "12/12/2006", "IMGID" : "5" } ,
+				{"IMGSRC" : "My Albums/Dinner 2006/page05.jpg", "TITLE" : "Annual Dinner 2006", "DATECR" : "12/12/2006", "IMGID" : "6" } 
+			] 
+		},
+		{"ALBUM" : "Dinner 2007" , "IMGCOUNT" : "3", "AlbumList" : 
+			[  
+				{"IMGSRC" : "My Albums/Dinner 2006/page00.jpg", "TITLE" : "Annual Dinner 2007", "DATECR" : "12/12/2006", "IMGID" : "1" } ,
+				{"IMGSRC" : "My Albums/Dinner 2006/page01.jpg", "TITLE" : "Annual Dinner 2007", "DATECR" : "12/12/2006", "IMGID" : "2" } ,
+				{"IMGSRC" : "My Albums/Dinner 2006/page02.jpg", "TITLE" : "Annual Dinner 2007", "DATECR" : "12/12/2006", "IMGID" : "3" } 
+			] 
+		}	
+	]
+ }
+	

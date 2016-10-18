@@ -1,0 +1,280 @@
+
+	<div class="container" align="center">	
+	<div class="row" align="center">
+		<div class="span3">
+			<div class="well well-small" style="background-color:#D8E0F2;">
+				<h3>Welcome!</h3>
+
+          
+<h4><u>{{year}} Management Team</u></h4>
+<img src="apps/core/images/shadows.png">
+<h3><small><b>Board</b></small></h3>
+<input type="hidden" name="year" ng-model='year="2016"'>
+<div align="center" data-ng-controller="AboutUs as vm">
+<font size="2" face="Calibri" align="left"> <strong>President</strong></font>
+    <div data-ng-repeat = "s in vm.BoardMembers | filter:{Role: 'PRESIDENT' , Year:year}">    
+        <font size="2" face="Calibri" align="left"  > {{s.name}}  &nbsp; &nbsp; {{s.phone}}</font>
+        <br>
+    </div>
+<br>
+
+<font size="2" face="Calibri" align="left"> <strong>Vice President</strong></font>
+    <div data-ng-repeat = "s in vm.BoardMembers | filter:{Role: 'VP' , Year:year}">    
+        <font size="2" face="Calibri" align="left"  > {{s.name}}  &nbsp; &nbsp; {{s.phone}}</font>
+        <br>
+    </div>
+<br>
+
+<font size="2" face="Calibri" align="left"> <strong>Secretary</strong></font>
+    <div data-ng-repeat = "s in vm.BoardMembers | filter:{Role: 'SECRETARY' , Year:year}">    
+        <font size="2" face="Calibri" align="left"  > {{s.name}}  &nbsp; &nbsp; {{s.phone}}</font>
+        <br>
+    </div>
+<br>
+
+<font size="2" face="Calibri" align="left"> <strong>Treasurer</strong></font>
+    <div data-ng-repeat = "s in vm.BoardMembers | filter:{Role: 'TREASURER' , Year:year}">    
+        <font size="2" face="Calibri" align="left"  > {{s.name}}  &nbsp; &nbsp; {{s.phone}}</font>
+        <br>
+    </div>
+<br>
+<!-- All the membrs of the board -->
+<font size="2" face="Calibri" align="left"> <strong>Members</strong></font>
+    <div data-ng-repeat = "s in vm.BoardMembers | filter:{Role: 'Member' , Year:year}">    
+        <font size="2" face="Calibri" align="left"  > {{s.name}}  &nbsp; &nbsp; {{s.phone}}</font>
+        <br>
+    </div>
+<br>
+<font size="2" face="Calibri" align="left"> <strong>Past President</strong></font>
+    <div data-ng-repeat = "s in vm.BoardMembers | filter:{Role: 'PP' , Year:year}">    
+        <font size="2" face="Calibri" align="left"  > {{s.name}}  &nbsp; &nbsp; {{s.phone}}</font>
+        <br>
+    </div>
+<br>
+<font size="2" face="Calibri" align="left"> <strong>IT/ Webmaster</strong></font>
+    <div data-ng-repeat = "s in vm.BoardMembers | filter:{Role: 'WEBMASTER' , Year:year}">    
+        <font size="2" face="Calibri" align="left"  > {{s.name}}  &nbsp; &nbsp; {{s.phone}}</font>
+        <br>
+    </div>
+<br>
+<font size="2" face="Calibri" align="left"> <strong>Entertainment</strong></font>
+    <div data-ng-repeat = "s in vm.BoardMembers | filter:{Role: 'Entertainment' , Year:year}">    
+        <font size="2" face="Calibri" align="left"  > {{s.name}}  &nbsp; &nbsp; {{s.phone}}</font>
+        <br>
+    </div>
+<br>
+<font size="2" face="Calibri" align="left"> <strong>Marketing</strong></font>
+    <div data-ng-repeat = "s in vm.BoardMembers | filter:{Role: 'Marketing' , Year:year}">    
+        <font size="2" face="Calibri" align="left"  > {{s.name}}  &nbsp; &nbsp; {{s.phone}}</font>
+        <br>
+    </div>
+<br>
+
+<img src="apps/core/images/shadows.png">
+<h3><small><b>ADVISORY COUNCIL</b></small></h3>
+
+
+<font size="2" face="Calibri" align="left"> <strong>Chair Person</strong></font>
+    <div data-ng-repeat = "s in vm.BoardMembers | filter:{Role: 'ACP' , Year:year}">    
+        <font size="2" face="Calibri" align="left"  > {{s.name}}  &nbsp; &nbsp; {{s.phone}}</font>
+        <br>
+    </div>
+<br>
+<font size="2" face="Calibri" align="left"> <strong>Deputy Chair Person</strong></font>
+    <div data-ng-repeat = "s in vm.BoardMembers | filter:{Role: 'ADCP' , Year:year}">    
+        <font size="2" face="Calibri" align="left"  > {{s.name}}  &nbsp; &nbsp; {{s.phone}}</font>
+        <br>
+    </div>
+<br>
+<font size="2" face="Calibri" align="left"> <strong>Members</strong></font>
+    <div data-ng-repeat = "s in vm.BoardMembers | filter:{Role: 'AM' , Year:year}">    
+        <font size="2" face="Calibri" align="left"  > {{s.name}}  &nbsp; &nbsp; {{s.phone}}</font>
+        <br>
+    </div>
+
+<!--<a href="#" class="btn"><small>Previous Mgt teams</small></a>-->
+
+</div>
+			</div>
+			<br/>
+			<br/>
+		</div>
+		<div class="span9">
+		<div class="well well-small" style="text-align:left;background-color:#D8E0F2;" >
+			<h3>AIACPA - Who we are</h3>
+			<p align="center"><img src="content/images/About_us.jpg" alt="AIACPA" /></p>
+			<p> <font size="2" face="Verdana, Arial" align="left">
+				Asian Indian Americans of Central Pennsylvania (AIACPA) was founded in 1991. It is a nonpartisan, secular and a nonprofit organization created with following five objectives: </font><br/>
+				 <ol>
+                            <font size="2"  align="left">
+                                <li>
+                                    <div align="left">
+                                        <font size="2" face="Verdana, Arial" align="left">Create, promote and encourage a forum to maintain the social and cultural heritage of the Indians of Asian origin residing in the United States of America. </font>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div align="left">
+                                        <font size="2" face="Verdana, Arial" align="left">Provide a congenial environment and open forum for social, cultural, professional and literary well-being of the Americans of the Asian Indian descent. </font>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div align="left">
+                                        <font size="2" face="Verdana, Arial" align="left">Actively participate in social and need oriented community organizations and programs.</font>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div align="left">
+                                        <font size="2" face="Verdana, Arial" align="left">Promote harmonious relations between Indians of Asian origins and Americans, and between the countries of India and the U.S.</font>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div align="left">
+                                        <font size="2" face="Verdana, Arial" align="left">Educate and encourage participation by Americans of Asian Indian descent in the democratic process of the United States of America.
+                                        <br />
+                                        </font>
+                                    </div>
+                                </li>
+                            </font>
+                        </ol>
+
+				<br/>
+				 <p align="left">
+                            <font size="2" face="Verdana, Arial">AIACPA is an association of individuals who trace their origin to the subcontinent of India. As an organization, AIACPA is a non-partisan/secular association which does not support any political ideology; rather the organization is interested in the democratic process of the country (USA). The Association undertakes several social and cultural activities and initiatives as well. It promotes the interests of Asian Indians and actively works to make the elected officials and policy makers aware of issues and concerns that affect the overarching Asian Indian community. <br />
+                                <br />
+                               AIACPA is a proud thread in the fabric of Central Pennsylvania, the state, and USA. Along with serving the interests of Asian Indian community, we actively participates in issues/concerns of the local community, Keystone State, and the nation. On an annual basis AIACPA undertakes several activities to promote this important goal.
+                                <br />
+                                <br />
+                                AIACPA hopes to spread friendship and understanding between the country of our heritage (India) and our adopted country...... (United States of America). India and America have so much in common. Both countries profess the same core values: functioning democracy, freedom of press, religious freedom, individual liberty, separation of religion and state, primacy of family in the social order. This commonality helps lay the foundation and explains well why these two countries are such natural allies in the world affairs. AIACPA cherishes this and promotes this commonality.
+                                <br /><br />
+                              </font>
+                        </p>
+                       
+                        <p align="left">
+                            <b><font color="#990000" size="3" face="Comic Sans MS">What has AIACPA done for the
+                                community? </font></b>
+                        </p>
+                        <p align="left">
+                            <font size="2" face="Verdana, Arial">AIACPA has been active since 1992. One of our biggest achievements has been to squarely place the Asian Indian community of the Central Pennsylvania area on the political and social map of Pennsylvania and the United States of America. The Founding Members of AIACPA have worked hard to ensure Asian Indians are treated equally both as professionals and individuals. This is a big change from the times when founding members immigrated to America. These members still reflect on the hard time they encountered in getting bank loans, realtors not showing homes in ‘good’ neighborhoods, or enjoyed a sense of ‘belonging’. Today, Asian Indians have cultivated a reputation for professionalism, high levels of education attainment, entrepreneurship, and charity. Examples of how AIACPA has worked to improve the image of Asian Indian Community in Central Pennsylvania include (but are not limited to):</font>
+                        </p>
+                        <p align="left">
+                            &nbsp;</p>
+                        <ol>
+                            <font size="2" face="Verdana, Arial" align="left">
+                                <li>
+                                    <div align="left">
+                                        <font size="2" face="Verdana, Arial" align="left">Bringing educational and political awareness to the community on important issues;</font>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div align="left">
+                                        <font size="2" face="Verdana, Arial" align="left">Sponsoring Industry delegations to and from Pennsylvania;
+                                        </font>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div align="left">
+                                        <font size="2" face="Verdana, Arial" align="left">Uniting and fundraising during natural disasters;</font>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div align="left">
+                                        <font size="2" face="Verdana, Arial" align="left">Educating the local Central Pennsylvania community about Indian culture and tradition; </font>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div align="left">
+                                        <font size="2" face="Verdana, Arial" align="left">Partnering with other communities for mutual understanding and benefits;</font>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div align="left">
+                                        <font size="2" face="Verdana, Arial" align="left">Teaching and spreading principles of nonviolence; </font>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div align="left">
+                                        <font size="2" face="Verdana, Arial" align="left">Providing timely needed important information to the Asian Indian community; </font>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div align="left">
+                                        <font size="2" face="Verdana, Arial" align="left">Helped assemble and insure Pennsylvania delegations success to/in India . </font>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div align="left">
+                                        <font size="2" face="Verdana, Arial" align="left">Promoting harmonious relations between Asian Indians and the broader community and assist new immigrants integrate and assimilate.
+</font>
+                                    </div>
+                                </li>
+                               
+                            </font>
+                        </ol>
+                        <br />
+                        <p align="left">
+                            <b><font color="#990000" size="3" face="Comic Sans MS">Why should I join AIACPA? </font>
+                            </b>
+                        </p>
+                        <p align="left">
+                            <font size="2" face="Verdana, Arial">As a nonprofit organization AIACPA has been dedicated to enriching the lives of Asian Americans and the larger community for almost two decades. Our efforts have spanned issues from humanitarian efforts, helping with global disasters, raising funds for the underserved.  And, while most of our work in uniting and promoting the community has been behind the scenes, all AIACPA members benefit from having a strong, united front for Asian Americans in Central Pennsylvania.  As a part of AIACPA you will also be a contributing member of an organization that brings spectacular entertainment, meaningful education seminars, productive networking, and engaging conversations with our state leaders. <br/><br/> Apart from making a difference in your community, other benefits of being a paid AIACPA member include,</font>
+                        </p>
+                        <p align="left"> </p>
+                        <ol>
+                            <font size="2" face="Verdana, Arial" align="left">
+                                <li>
+                                    <div align="left">
+                                        <font size="2" face="Verdana, Arial" align="left">Free admission to Annual Membership dinners Meeting (including spouse)</font>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div align="left">
+                                        <font size="2" face="Verdana, Arial" align="left">Free admission to AIACPA annual seminars (including spouse)
+                                        </font>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div align="left">
+                                        <font size="2" face="Verdana, Arial" align="left">Free admission to AIACPA mini seminars</font>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div align="left">
+                                        <font size="2" face="Verdana, Arial" align="left">Networking opportunities with local, state, US, and business leadership</font>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div align="left">
+                                        <font size="2" face="Verdana, Arial" align="left"> Guidance and support during personal situations</font>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div align="left">
+                                        <font size="2" face="Verdana, Arial" align="left">A feeling of community belongingness</font>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div align="left">
+                                        <font size="2" face="Verdana, Arial" align="left">Eligible to become AIACPA Board member</font>
+                                    </div>
+                                </li>
+                                
+                               
+                            </font>
+                        </ol>
+                        <p align="center">
+                            <font color="#990000" size="2" face="Verdana, Arial"><b>Please support your community and make it stronger by becoming a member.</b></font>
+                        </p>
+                        <p align="center">
+                            <font color="#990000" size="2" face="Verdana, Arial"><strong>Membership Fee (Effective Jan,08): Regular Annual is $50.00 and Life Member is $500.00. Senior Citizens(65 and above): $250.00</strong></font>
+                            <p align="center">
+                                &nbsp;<p align="left">
+                                <font size="2" face="Verdana, Arial">This membership fee includes complimentary dinner for couple at Annual general body meeting that is held in Oct/Nov, discount on AIA sponsored cultural programs and free entry to some of the seminars.</font></p>
+                            <p align="left"></p>
+
+			
+			</p>
+			
+		</div>
+		</div>
+		</div>
+	</div>

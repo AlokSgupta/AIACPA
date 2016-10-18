@@ -1,0 +1,134 @@
+
+<div class="container" align="center">
+    <div class="row">
+        <!-- Carousel ======================================== -->
+       
+            <carousel interval="6000">
+                <slide active="slide.active">
+                    <img src="Content/Images/carousel/AIACPA Banner.jpg">
+
+                </slide>
+                <slide>
+                    <img src="Content/Images/carousel/AIACPA_C_2.jpg">
+
+                </slide>
+               
+                <slide>
+                    <img src="Content/Images/carousel/AIACPA_C_4.jpg">
+
+                </slide>
+                <!--<slide>
+                    <img src="Content/Images/carousel/AIACPA_C_3.jpg">
+
+
+                </slide>
+                  <slide >
+                   <img src="Content/Images/carousel/AIACPA_C_5.jpg" >
+
+                 </slide>-->
+            </carousel>
+        </div>
+
+        <!-- ends - Carousel ======================================== -->
+        <div class="row">
+
+            <div class="span4 pull-right">
+                <span>
+                    <a href="http://oi.vresp.com/?fid=b3982aede6" target="_blank" class="btn  btn-success" data-placement="top" data-original-title="Join our mailing list"><img style="width:30px" src="content/images/mail.png" alt="Join our mailing list" title="Join our mailing list"></a>
+                    <a href="https://www.facebook.com/AsianIndianAmericansOfCentralPA?fref=ts" target="_blank" class="btn  btn-success" data-placement="top" data-original-title="Find us on via facebook"><img style="width:30px" src="content/images/facebook.png" alt="facebook" title="facebook"></a>
+                    <a href="https://twitter.com/aiacpaorg" target="_blank" class="btn  btn-success" data-placement="top" data-original-title="Find us on via twitter"><img style="width:30px" src="content/images/twitter.png" alt="twitter" title="twitter"></a>
+                    <a href="#" class="btn  btn-success" data-placement="top" data-original-title="Find us on via youtube"><img style="width:30px" src="content/images/rss.png" alt="News" title="News"></a>
+
+                </span>
+                <br />
+            </div>
+
+        </div>
+        <br />
+        <div class="row">
+            <div class="span4" data-ng-controller="Events as ev">
+                <div class="row thumbnail">
+                    <br />
+                <h4>AIACPA Events</h4><!--<a href="http://www.aiacpa.org/summit/IDReg.aspx" target="_blank" class="btn btn-success">
+                    <small>Register</small></a>-->
+                    <br />  
+                </div>
+                <div class="row thumbnail" data-ng-repeat="eve in ev.upcomingEvents">
+                    <div style="background: center {{eve.bgcolor}}; vertical-align:middle;">
+                        <div class="thumbnail"><a data-ui-sref='{{eve.path}}'><h5>{{eve.eventName}}</h5></a></div>
+                        <h6><b>{{eve.eventdate}}</b></h6>
+                        <h6> {{eve.Description}}</h6>
+                       
+                    </div>
+                 
+                </div>
+
+
+            </div>
+
+            <div class="span4">
+
+                <div class="thumbnail">
+                    <h4>Who Are We?</h4>
+                    <div style="background-color:#F6F6F6;">
+                        <h4>
+                            <span>
+                                <a href="#"><img src="content/images/logo.jpg" alt="AIACPA"></a> &nbsp; AIACPA
+                            </span>
+                        </h4>
+                        <p>Asian Indian Americans of Central Pennsylvania  <b>(AIACPA)</b> is a non-profit organization that helps promote cultural richness and education commitment for Central Pennsylvania region. The organization has been very successful in meeting its objectives in the past 22 years and currently serving over 6,000 Asian Indian families, many organizations, and other families by organizing educational and medical seminars, cultural events, and formal networking events.</p>
+                        <a data-ui-sref="about" class="btn"><small>view details</small></a>
+                    </div>
+                </div>
+                </div>
+                <div class="span4">
+                   
+                    <div class="thumbnail">
+                        <h4>Join us</h4>
+                        <div style="background-color:#F6F6F6;">
+                          
+                            <p>
+                                As a nonprofit organization AIACPA has been dedicated to enriching the lives of Asian Americans and the larger community for almost two decades. Our efforts have spanned issues from humanitarian efforts, helping with global disasters, raising funds for the underserved.  As a part of AIACPA you will also be a contributing member of an organization that brings spectacular entertainment, meaningful education seminars, productive networking, and engaging conversations with our state leaders.
+                                <br>
+                                <b>Please support your community and make it stronger by becoming a member.</b>
+                            </p>
+                            <a data-ui-sref="about" class="btn"><small>Join Us</small></a>
+                        </div>
+                    </div>
+                    <br />
+
+                </div>
+            <br /><br />
+            <div class="span8" data-ng-controller="Sponser as sp">
+                <div class="thumbnail">
+                    <h4>Our Annual Sponsors</h4>
+                    <img src="Content/Images/carousel/AIACPA_C_3.jpg">
+                     
+                   
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+
+            <div class="span4">
+                <span>
+                    <a href="http://oi.vresp.com/?fid=b3982aede6" target="_blank" class="btn  btn-success btn-large" data-placement="top" data-original-title="Membership">Join our mailing list</a>
+                </span>
+                <br />
+            </div>
+            <div class="span4">
+                <span>
+                    <a href="#" class="btn  btn-success btn-large" data-placement="top" data-original-title="Membership" data-ui-sref="contact" data-ui-sref-active="active">Become Member</a>
+                </span>
+                <br /> 
+            </div>
+            <div class="span4">
+                <span>
+                    <a href="#" class="btn  btn-success btn-large" data-placement="top" data-original-title="Sponsers" data-ui-sref="contact" data-ui-sref-active="active">Become a Sponsor</a>
+
+                </span>
+                <br />
+            </div>
+        </div>
+    </div>

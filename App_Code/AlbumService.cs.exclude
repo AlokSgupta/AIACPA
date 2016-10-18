@@ -1,0 +1,336 @@
+﻿using System;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.ServiceModel.Activation;
+using System.Collections.Generic;
+using System.Text;
+using System.Collections;
+using System.Data;
+using System.Data.OleDb;
+using System.Web;
+
+
+[ServiceContract(Namespace = "")]
+[AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
+public class AlbumService
+{
+
+	    [OperationContract]
+	    public void DoWork()
+	{
+		// Add your operation implementation here
+		return;
+	}
+
+        private DataSet myDataSet = new DataSet();
+        private List<AlbumImageObj> imglist = new List<AlbumImageObj>();
+        public AlbumService()
+        {
+            Getdataset();
+        }
+
+        private DataSet Getdataset()
+        {
+            //myDataSet = null;
+            //if (myDataSet == null) ;// && myDataSet.Tables[0].Rows.Count <= 0)
+            //{
+                var spath = AppDomain.CurrentDomain.BaseDirectory;
+                OleDbConnection conn = new OleDbConnection();
+                OleDbCommand cmd = conn.CreateCommand();
+                string cstr = @"Provider=Microsoft.Jet.OLEDB.4.0;Data source=" + spath.ToString() + "access_db\\AIACPADB.mdb";
+                //string cstr = @"Provider=Microsoft.Jet.OLEDB.4.0;Data source=" + Server.MapPath("~") + +"\\access_db\\AIACPADB.mdb";
+                conn.ConnectionString = cstr;// @"Provider=Microsoft.Jet.OLEDB.4.0;Data source=" + asm.ToString() + "\\App_Data\\AIACPADB.mdb";
+                String sqlselect = "SELECT * FROM AlbumImage";// WHERE ExpiredYN=0 ORDER BY NEWSDATE DESC"; + spath.ToString()
+                try
+                {
+                    conn.Open();
+                    cmd.CommandText = sqlselect;
+                    cmd.CommandType = CommandType.Text;
+                    OleDbDataAdapter myDataAdapter = new OleDbDataAdapter(cmd);
+                    myDataAdapter.Fill(myDataSet, "Album");
+                    //int id = cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    //SendeMailClass.sendmail(ex.Message.ToString() + "--<br />" + ex.StackTrace.ToString(), "upmittal@hotmail.com", "error");
+
+                    //SendeMailClass.sendmail(txtfname.Text + "--<br />" + txtemail.Text + "--<br />" + noofadults.Text + "--<br />" + noofchildren.Text + "--<br />" + txtemail.Text + "--<br />" + txtphoneno.Text + "--<br />" + sqlInsert + "--<br />" + sqlselect + "--<br />" + sqlvalidate + "--<br />" + ex.Message.ToString() + "--<br />" + ex.StackTrace.ToString(), "upmittal@hotmail.com", "error");
+                    cmd.Dispose();
+                    conn.Close();
+                    conn.Dispose();
+                }
+                finally
+                {
+                    cmd.Dispose();
+                    conn.Close();
+                    conn.Dispose();
+                }
+            //}
+            return myDataSet;
+        }
+
+        [OperationContract]
+        public List<AlbumImageObj> GetAllImages()
+        {
+
+            //var asm = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            //HttpServerUtility sutil = new HttpServerUtility();
+            //var spath = sutil.MapPath("~");
+            //if (myDataSet == null) ;// && myDataSet.Tables[0].Rows.Count <= 0)
+            //{
+            //    var spath = AppDomain.CurrentDomain.BaseDirectory;
+            //    OleDbConnection conn = new OleDbConnection();
+            //    OleDbCommand cmd = conn.CreateCommand();
+            //    string cstr = @"Provider=Microsoft.Jet.OLEDB.4.0;Data source=" + spath.ToString() + "App_Data\\AIACPADB.mdb";
+            //    conn.ConnectionString = cstr;// @"Provider=Microsoft.Jet.OLEDB.4.0;Data source=" + asm.ToString() + "\\App_Data\\AIACPADB.mdb";
+            //    String sqlselect = "SELECT * FROM AlbumImage";// WHERE ExpiredYN=0 ORDER BY NEWSDATE DESC"; + spath.ToString()
+            //    try
+            //    {
+            //        conn.Open();
+            //        cmd.CommandText = sqlselect;
+            //        cmd.CommandType = CommandType.Text;
+            //        OleDbDataAdapter myDataAdapter = new OleDbDataAdapter(cmd);
+            //        myDataAdapter.Fill(myDataSet, "Album");
+            //        //int id = cmd.ExecuteNonQuery();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        //SendeMailClass.sendmail(ex.Message.ToString() + "--<br />" + ex.StackTrace.ToString(), "upmittal@hotmail.com", "error");
+
+            //        //SendeMailClass.sendmail(txtfname.Text + "--<br />" + txtemail.Text + "--<br />" + noofadults.Text + "--<br />" + noofchildren.Text + "--<br />" + txtemail.Text + "--<br />" + txtphoneno.Text + "--<br />" + sqlInsert + "--<br />" + sqlselect + "--<br />" + sqlvalidate + "--<br />" + ex.Message.ToString() + "--<br />" + ex.StackTrace.ToString(), "upmittal@hotmail.com", "error");
+            //        cmd.Dispose();
+            //        conn.Close();
+            //        conn.Dispose();
+            //    }
+            //    finally
+            //    {
+            //        cmd.Dispose();
+            //        conn.Close();
+            //        conn.Dispose();
+            //    }
+            //}
+            DataTable dts = new DataTable();
+            dts = myDataSet.Tables[0];
+            IEnumerable<DataRow> query = from dt in dts.AsEnumerable() select dt;
+
+
+            //for (int i = 0; i < dts.Rows.Count; i++)
+            //{
+            //    imglist[i].ImageSource = p.Field<string>("ImageSource");
+            //    imglist[i].Title = p.Field<string>("Title");
+            //    imglist[i].DateCreated = p.Field<DateTime>("DateCreated");
+            //    imglist[i].Album = p.Field<string>("Album");
+            //    imglist[i].ImageId = p.Field<int>("ImageId");
+            //}
+            //int i = 0;
+            foreach (DataRow p in query)
+            {
+                AlbumImageObj imgitm = new AlbumImageObj();
+                imgitm.ImageSource = p.Field<string>("ImageSource");
+                imgitm.Title = p.Field<string>("Title");
+                imgitm.DateCreated = p.Field<DateTime>("DateCreated");
+                imgitm.Album = p.Field<string>("Album");
+                imgitm.ImageId = p.Field<int>("ImageId");
+                imglist.Add(imgitm);
+            }
+            return imglist;
+            //DataClasses1DataContext db = new DataClasses1DataContext();
+            //var matchingImages = from img in db.Images select img; return matchingImages.ToList();
+
+            //var matchingImages = dt.Select();
+            //return (AlbumImageObj) matchingImages.ToList();
+        }
+
+        [OperationContract]
+        public List<Album> GetAllAlbums()
+        {
+            //if (myDataSet == null);// && myDataSet.Tables[0].Rows.Count <= 0)
+            //{
+            //    var spath = AppDomain.CurrentDomain.BaseDirectory;
+            //    OleDbConnection conn = new OleDbConnection();
+            //    OleDbCommand cmd = conn.CreateCommand();
+            //    string cstr = @"Provider=Microsoft.Jet.OLEDB.4.0;Data source=" + spath.ToString() + "App_Data\\AIACPADB.mdb";
+            //    conn.ConnectionString = cstr;// @"Provider=Microsoft.Jet.OLEDB.4.0;Data source=" + asm.ToString() + "\\App_Data\\AIACPADB.mdb";
+            //    String sqlselect = "SELECT * FROM AlbumImage";// WHERE ExpiredYN=0 ORDER BY NEWSDATE DESC"; + spath.ToString()
+            //    try
+            //    {
+            //        conn.Open();
+            //        cmd.CommandText = sqlselect;
+            //        cmd.CommandType = CommandType.Text;
+            //        OleDbDataAdapter myDataAdapter = new OleDbDataAdapter(cmd);
+            //        myDataAdapter.Fill(myDataSet, "Album");
+            //        //int id = cmd.ExecuteNonQuery();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        //SendeMailClass.sendmail(ex.Message.ToString() + "--<br />" + ex.StackTrace.ToString(), "upmittal@hotmail.com", "error");
+
+            //        //SendeMailClass.sendmail(txtfname.Text + "--<br />" + txtemail.Text + "--<br />" + noofadults.Text + "--<br />" + noofchildren.Text + "--<br />" + txtemail.Text + "--<br />" + txtphoneno.Text + "--<br />" + sqlInsert + "--<br />" + sqlselect + "--<br />" + sqlvalidate + "--<br />" + ex.Message.ToString() + "--<br />" + ex.StackTrace.ToString(), "upmittal@hotmail.com", "error");
+            //        cmd.Dispose();
+            //        conn.Close();
+            //        conn.Dispose();
+            //    }
+            //    finally
+            //    {
+            //        cmd.Dispose();
+            //        conn.Close();
+            //        conn.Dispose();
+            //    }
+            //}
+            //DataTable dts1 = new DataTable();
+            //var dts = myDataSet.Tables[0].AsEnumerable();
+            //if (myDataSet == null) ;// && myDataSet.Tables[0].Rows.Count <= 0)
+            //{
+            //    var spath = AppDomain.CurrentDomain.BaseDirectory;
+            //    OleDbConnection conn = new OleDbConnection();
+            //    OleDbCommand cmd = conn.CreateCommand();
+            //    string cstr = @"Provider=Microsoft.Jet.OLEDB.4.0;Data source=" + spath.ToString() + "App_Data\\AIACPADB.mdb";
+            //    conn.ConnectionString = cstr;// @"Provider=Microsoft.Jet.OLEDB.4.0;Data source=" + asm.ToString() + "\\App_Data\\AIACPADB.mdb";
+            //    String sqlselect = "SELECT * FROM AlbumImage";// WHERE ExpiredYN=0 ORDER BY NEWSDATE DESC"; + spath.ToString()
+            //    try
+            //    {
+            //        conn.Open();
+            //        cmd.CommandText = sqlselect;
+            //        cmd.CommandType = CommandType.Text;
+            //        OleDbDataAdapter myDataAdapter = new OleDbDataAdapter(cmd);
+            //        myDataAdapter.Fill(myDataSet, "Album");
+            //        //int id = cmd.ExecuteNonQuery();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        //SendeMailClass.sendmail(ex.Message.ToString() + "--<br />" + ex.StackTrace.ToString(), "upmittal@hotmail.com", "error");
+
+            //        //SendeMailClass.sendmail(txtfname.Text + "--<br />" + txtemail.Text + "--<br />" + noofadults.Text + "--<br />" + noofchildren.Text + "--<br />" + txtemail.Text + "--<br />" + txtphoneno.Text + "--<br />" + sqlInsert + "--<br />" + sqlselect + "--<br />" + sqlvalidate + "--<br />" + ex.Message.ToString() + "--<br />" + ex.StackTrace.ToString(), "upmittal@hotmail.com", "error");
+            //        cmd.Dispose();
+            //        conn.Close();
+            //        conn.Dispose();
+            //    }
+            //    finally
+            //    {
+            //        cmd.Dispose();
+            //        conn.Close();
+            //        conn.Dispose();
+            //    }
+            //}
+            DataTable dts = new DataTable();
+            dts = myDataSet.Tables[0];
+            IEnumerable<DataRow> query = from dt in dts.AsEnumerable() select dt;
+
+
+            //for (int i = 0; i < dts.Rows.Count; i++)
+            //{
+            //    imglist[i].ImageSource = p.Field<string>("ImageSource");
+            //    imglist[i].Title = p.Field<string>("Title");
+            //    imglist[i].DateCreated = p.Field<DateTime>("DateCreated");
+            //    imglist[i].Album = p.Field<string>("Album");
+            //    imglist[i].ImageId = p.Field<int>("ImageId");
+            //}
+            int i = 0;
+            foreach (DataRow p in query)
+            {
+                AlbumImageObj imgitm = new AlbumImageObj();
+                imgitm.ImageSource = p.Field<string>("ImageSource");
+                imgitm.Title = p.Field<string>("Title");
+                imgitm.DateCreated = p.Field<DateTime>("DateCreated");
+                imgitm.Album = p.Field<string>("Album");
+                imgitm.ImageId = p.Field<int>("ImageId");
+                imglist.Add(imgitm);
+            }
+            var matchingImages = from img in imglist
+                                 group img by
+                                     img.Album into g
+                                 select new Album
+                                 {
+                                     Title = g.Key,
+                                     ImagesCount = g.Count(),
+                                     AlbumImage = "My Albums/Icons/" + g.Key + ".png",
+                                     Images = g.ToList<AlbumImageObj>()
+                                 };
+            return matchingImages.ToList();
+            //var query = from dt in dts
+            //            group dt by dt.Field<string>("Album") into g
+            //            select new Album
+            //            {
+            //                Title = g.Key, 
+            //                ImagesCount = g.Count(), 
+            //                AlbumImage = "My Albums/Icons/" + g.Key + ".png",
+            //                //Images = g.ToList<AlbumImageObj>() 
+            //            };
+
+
+
+            //List<Album> imglist = new List<Album>();
+            //for (int i = 0; i < dts.Rows.Count; i++)
+            //{
+            //    imglist[i].ImageSource = p.Field<string>("ImageSource");
+            //    imglist[i].Title = p.Field<string>("Title");
+            //    imglist[i].DateCreated = p.Field<DateTime>("DateCreated");
+            //    imglist[i].Album = p.Field<string>("Album");
+            //    imglist[i].ImageId = p.Field<int>("ImageId");
+            //}
+            //int i = 0;
+            //foreach (Album p in query)
+            //{
+            //    imglist[i].AlbumImage = p.AlbumImage;
+            //    imglist[i].Title = p.Title;
+            //    //imglist[i].Images = p.Field<AlbumImageObj>("Images");
+            //    imglist[i].ImagesCount = p.ImagesCount;
+            //    i = i + 1;
+            //}
+            //return imglist; 
+
+            //DataClasses1DataContext db = new DataClasses1DataContext();
+            //var matchingImages = from img in db.Images group img by img.Album into g select new Album { Title = g.Key, ImagesCount = g.Count(), AlbumImage = "My Albums/Icons/"+g.Key+".png",Images= g.ToList<Image>()};
+            //return matchingImages.ToList();
+        }
+
+        [DataContract]
+        public class Image2
+        {
+            [DataMember]
+            public string ImageSource { get; set; }
+
+            [DataMember]
+            public string Title { get; set; }
+
+            [DataMember]
+            public string Album { get; set; }
+        }
+
+        [DataContract]
+        public class Album
+        {
+            [DataMember]
+            public string Title { get; set; }
+
+            [DataMember]
+            public int ImagesCount { get; set; }
+
+            [DataMember]
+            public string AlbumImage { get; set; }
+
+            [DataMember]
+            public List<AlbumImageObj> Images { get; set; }
+        }
+
+ 
+}
+
+public class CustomHostFactory : ServiceHostFactory
+{
+    protected override ServiceHost CreateServiceHost(Type serviceType, Uri[] baseAddresses)
+    {
+        // If more than one base address exists then return the second 
+        // address, otherwise return the first address
+        if (baseAddresses.Length > 1)
+        {
+            return new ServiceHost(serviceType, baseAddresses[1]);
+        }
+        else
+        {
+            return new ServiceHost(serviceType, baseAddresses[0]);
+        }
+    }
+}
+

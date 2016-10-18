@@ -1,0 +1,94 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Collections.Specialized;
+using System.Web;
+using System.Net;
+using System.Collections.ObjectModel;
+using System.Xml;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+
+
+namespace PayPal
+{
+    [Serializable]
+    public abstract class MyControl :Control 
+    {
+        #region Validation
+
+        private StringDictionary _BrokenRules = new StringDictionary();
+
+        /// <summary>
+        /// Add or remove a broken rule.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="errorMessage">The description of the error</param>
+        /// <param name="isBroken">True if the validation rule is broken.</param>
+        protected virtual void AddRule(string propertyName, string errorMessage, bool isBroken)
+        {
+            if (isBroken)
+            {
+                _BrokenRules[propertyName] = errorMessage;
+            }
+            else
+            {
+                if (_BrokenRules.ContainsKey(propertyName))
+                {
+                    _BrokenRules.Remove(propertyName);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Reinforces the business rules by adding additional rules to the 
+        /// broken rules collection.
+        /// </summary>
+        protected abstract void ValidationRules();
+
+        /// <summary>
+        /// Gets whether the object is valid or not.
+        /// </summary>
+        public bool IsValid
+        {
+            get
+            {
+                ValidationRules();
+                return this._BrokenRules.Count == 0;
+            }
+        }
+
+        /// /// <summary>
+        /// If the object has broken business rules, use this property to get access
+        /// to the different validation messages.
+        /// </summary>
+        public virtual string ValidationMessage
+        {
+            get
+            {
+                if (!IsValid)
+                {
+                    StringBuilder sb = new StringBuilder();
+                    foreach (string messages in this._BrokenRules.Values)
+                    {
+                        sb.AppendLine(messages);
+                    }
+
+                    return sb.ToString();
+                }
+
+                return string.Empty;
+            }
+        }
+
+        #endregion
+
+        protected override void Render(HtmlTextWriter writer)
+        {
+
+            if (!IsValid)
+                throw new InvalidOperationException(ValidationMessage);
+
+        }
+    }
+}

@@ -1,0 +1,486 @@
+#region Using
+
+using System;
+using System.IO;
+using System.Configuration;
+using System.Web;
+using System.Net;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Xml;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Text;
+
+#endregion
+
+namespace PayPal
+{
+    /// <summary>
+    /// Summary description for PayPal
+    /// </summary>
+    public class BuyNow : MyControl
+    {
+        #region Constructor
+
+        public BuyNow()
+        {
+            //
+            // TODO: Add constructor logic here
+            //
+        }
+
+        #endregion
+
+        #region Properties
+
+        #region Basic Setup
+
+        private String _Business;
+        public String business
+        {
+            get { return _Business; }
+            set { _Business = value; }
+        }
+
+        private String _ItemName;
+        public String itemname
+        {
+            get { return _ItemName; }
+            set { _ItemName = value; }
+        }
+
+        private String _ItemId;
+        public String itemId
+        {
+            get { return _ItemId; }
+            set { _ItemId = value; }
+        }
+
+        private Double _Amount;
+        public Double amount
+        {
+            get { return _Amount; }
+            set { _Amount = value; }
+        }
+
+        private CurrenyCode _Currency;
+        public CurrenyCode currency
+        {
+            get { return _Currency; }
+            set { _Currency = value; }
+        }
+
+        public Dictionary<string, string> DefaultBuyersCountry;
+        public Int32 Weight;
+        public Dictionary<string, string> WeightUnit;
+
+        private ButtonStyles _ButtonStyle;
+        public ButtonStyles buttonstyle
+        {
+            get { return _ButtonStyle; }
+            set { _ButtonStyle = value; }
+        }
+
+        private String _ButtonStyleURL;
+        public String buttonstyleurl
+        {
+            get { return _ButtonStyleURL; }
+            set { _ButtonStyleURL = value; }
+        }
+
+        public String buttonencryption;
+        public String postagemethod;
+        public String vat;
+
+        #endregion
+
+        #region More Options
+
+        public String CustomiseYourPaymentPages;
+        public String CustomiseYourDonorsExperience;
+        public String QuantityAndPostagePreferences;
+        public Boolean CustomerNotesAndSpecialInstructions;
+        public String CustomerNotesAndSpecialInstructionsNoteTitle;
+        public String ChooseAnEmailAddressToReceivePayment;
+
+        #endregion
+
+        #endregion
+
+        #region eNums
+
+        public enum CurrenyCode
+        {
+            GBP,
+            AUD,
+            CAD,
+            CZK,
+            DKK,
+            EUR,
+            HKD,
+            HUF,
+            JPY,
+            NZD,
+            NOK,
+            PLN,
+            SGD,
+            SEK,
+            CHF,
+            USD
+        }
+
+        public enum ButtonStyles
+        {
+            SampleBuyNowButton107x26,
+            SampleBuyNowButton122x47,
+            SampleBuyNowButton86x21,
+            SampleBuyPayButton107x26,
+            SampleBuyPayButton122x47,
+            SampleBuyPayButton86x21
+        }
+        #endregion
+
+        #region Dictionary
+
+        //public Dictionary<string, string> CurrencyCodeLookUp
+        //{
+        //    get
+        //    {
+        //        if (_CurrencyCode.Count == 0)
+        //        {
+        //            // Add some elements to the dictionary. There are no 
+        //            // duplicate keys, but some of the values are duplicates.
+        //            _CurrencyCode.Add("GBP", "British Pounds");
+        //            _CurrencyCode.Add("AUD", "Australian Dollars");
+        //            _CurrencyCode.Add("CAD", "Canadian Dollars");
+        //            _CurrencyCode.Add("CZK", "Czech Koruna");
+        //            _CurrencyCode.Add("DKK", "Danish Kroner");
+        //            _CurrencyCode.Add("EUR", "Euros");
+        //            _CurrencyCode.Add("HKD", "Hong Kong Dollars");
+        //            _CurrencyCode.Add("HUF", "Hungarian Forint");
+        //            _CurrencyCode.Add("JPY", "Japanese Yen");
+        //            _CurrencyCode.Add("NZD", "New Zealand Dollars");
+        //            _CurrencyCode.Add("NOK", "Norwegian Krone");
+        //            _CurrencyCode.Add("PLN", "Polish Zlotych");
+        //            _CurrencyCode.Add("SGD", "Singapore Dollars");
+        //            _CurrencyCode.Add("SEK", "Swedish Kronor");
+        //            _CurrencyCode.Add("CHF", "Swiss Francs");
+        //            _CurrencyCode.Add("USD", "US Dollars");
+        //        }
+        //        return _CurrencyCode;
+        //    }
+        //}
+
+        private static Dictionary<string, string> _BuyersCountries = new Dictionary<string, string>();
+        public static Dictionary<string, string> BuyersCountries
+        {
+            get
+            {
+                if (_BuyersCountries.Count == 0)
+                {
+                    _BuyersCountries.Add("USD", "US Dollars");
+                    _BuyersCountries.Add("GB", "United Kingdom");
+                    _BuyersCountries.Add("AL", "Albania");
+                    _BuyersCountries.Add("DZ", "Algeria");
+                    _BuyersCountries.Add("AD", "Andorra");
+                    _BuyersCountries.Add("AO", "Angola");
+                    _BuyersCountries.Add("AI", "Anguilla");
+                    _BuyersCountries.Add("AG", "Antigua and Barbuda");
+                    _BuyersCountries.Add("AR", "Argentina");
+                    _BuyersCountries.Add("AM", "Armenia");
+                    _BuyersCountries.Add("AW", "Aruba");
+                    _BuyersCountries.Add("AU", "Australia");
+                    _BuyersCountries.Add("AT", "Austria");
+                    _BuyersCountries.Add("AZ", "Azerbaijan Republic");
+                    _BuyersCountries.Add("BS", "Bahamas");
+                    _BuyersCountries.Add("BH", "Bahrain");
+                    _BuyersCountries.Add("BB", "Barbados");
+                    _BuyersCountries.Add("BE", "Belgium");
+                    _BuyersCountries.Add("BZ", "Belize");
+                    _BuyersCountries.Add("BJ", "Benin");
+                    _BuyersCountries.Add("BM", "Bermuda");
+                    _BuyersCountries.Add("BT", "Bhutan");
+                    _BuyersCountries.Add("BO", "Bolivia");
+                    _BuyersCountries.Add("BA", "Bosnia and Herzegovina");
+                    _BuyersCountries.Add("BW", "Botswana");
+                    _BuyersCountries.Add("BR", "Brazil");
+                    _BuyersCountries.Add("VG", "British Virgin Islands");
+                    _BuyersCountries.Add("BN", "Brunei");
+                    _BuyersCountries.Add("BG", "Bulgaria");
+                    _BuyersCountries.Add("BF", "Burkina Faso");
+                    _BuyersCountries.Add("BI", "Burundi");
+                    _BuyersCountries.Add("KH", "Cambodia");
+                    _BuyersCountries.Add("CA", "Canada");
+                    _BuyersCountries.Add("CV", "Cape Verde");
+                    _BuyersCountries.Add("KY", "Cayman Islands");
+                    _BuyersCountries.Add("TD", "Chad");
+                    _BuyersCountries.Add("CL", "Chile");
+                    _BuyersCountries.Add("C2", "China");
+                    _BuyersCountries.Add("CO", "Colombia");
+                    _BuyersCountries.Add("KM", "Comoros");
+                    _BuyersCountries.Add("CK", "Cook Islands");
+                    _BuyersCountries.Add("CR", "Costa Rica");
+                    _BuyersCountries.Add("HR", "Croatia");
+                    _BuyersCountries.Add("CY", "Cyprus");
+                    _BuyersCountries.Add("CZ", "Czech Republic");
+                    _BuyersCountries.Add("CD", "Democratic Republic of the Congo");
+                    _BuyersCountries.Add("DK", "Denmark");
+                    _BuyersCountries.Add("DJ", "Djibouti");
+                    _BuyersCountries.Add("DM", "Dominica");
+                    _BuyersCountries.Add("DO", "Dominican Republic");
+                    _BuyersCountries.Add("EC", "Ecuador");
+                    _BuyersCountries.Add("SV", "El Salvador");
+                    _BuyersCountries.Add("ER", "Eritrea");
+                    _BuyersCountries.Add("EE", "Estonia");
+                    _BuyersCountries.Add("ET", "Ethiopia");
+                    _BuyersCountries.Add("FK", "Falkland Islands");
+                    _BuyersCountries.Add("FO", "Faroe Islands");
+                    _BuyersCountries.Add("FM", "Federated States of Micronesia");
+                    _BuyersCountries.Add("FJ", "Fiji");
+                    _BuyersCountries.Add("FI", "Finland");
+                    _BuyersCountries.Add("FR", "France");
+                    _BuyersCountries.Add("GF", "French Guiana");
+                    _BuyersCountries.Add("PF", "French Polynesia");
+                    _BuyersCountries.Add("GA", "Gabon Republic");
+                    _BuyersCountries.Add("GM", "Gambia");
+                    _BuyersCountries.Add("DE", "Germany");
+                    _BuyersCountries.Add("GI", "Gibraltar");
+                    _BuyersCountries.Add("GR", "Greece");
+                    _BuyersCountries.Add("GL", "Greenland");
+                    _BuyersCountries.Add("GD", "Grenada");
+                    _BuyersCountries.Add("GP", "Guadeloupe");
+                    _BuyersCountries.Add("GT", "Guatemala");
+                    _BuyersCountries.Add("GN", "Guinea");
+                    _BuyersCountries.Add("GW", "Guinea Bissau");
+                    _BuyersCountries.Add("GY", "Guyana");
+                    _BuyersCountries.Add("HN", "Honduras");
+                    _BuyersCountries.Add("HK", "Hong Kong");
+                    _BuyersCountries.Add("HU", "Hungary");
+                    _BuyersCountries.Add("IS", "Iceland");
+                    _BuyersCountries.Add("IN", "India");
+                    _BuyersCountries.Add("ID", "Indonesia");
+                    _BuyersCountries.Add("IE", "Ireland");
+                    _BuyersCountries.Add("IL", "Israel");
+                    _BuyersCountries.Add("IT", "Italy");
+                    _BuyersCountries.Add("JM", "Jamaica");
+                    _BuyersCountries.Add("JP", "Japan");
+                    _BuyersCountries.Add("JO", "Jordan");
+                    _BuyersCountries.Add("KZ", "Kazakhstan");
+                    _BuyersCountries.Add("KE", "Kenya");
+                    _BuyersCountries.Add("KI", "Kiribati");
+                    _BuyersCountries.Add("KW", "Kuwait");
+                    _BuyersCountries.Add("KG", "Kyrgyzstan");
+                    _BuyersCountries.Add("LA", "Laos");
+                    _BuyersCountries.Add("LV", "Latvia");
+                    _BuyersCountries.Add("LS", "Lesotho");
+                    _BuyersCountries.Add("LI", "Liechtenstein");
+                    _BuyersCountries.Add("LT", "Lithuania");
+                    _BuyersCountries.Add("LU", "Luxembourg");
+                    _BuyersCountries.Add("MG", "Madagascar");
+                    _BuyersCountries.Add("MW", "Malawi");
+                    _BuyersCountries.Add("MY", "Malaysia");
+                    _BuyersCountries.Add("MV", "Maldives");
+                    _BuyersCountries.Add("ML", "Mali");
+                    _BuyersCountries.Add("MT", "Malta");
+                    _BuyersCountries.Add("MH", "Marshall Islands");
+                    _BuyersCountries.Add("MQ", "Martinique");
+                    _BuyersCountries.Add("MR", "Mauritania");
+                    _BuyersCountries.Add("MU", "Mauritius");
+                    _BuyersCountries.Add("YT", "Mayotte");
+                    _BuyersCountries.Add("MX", "Mexico");
+                    _BuyersCountries.Add("MN", "Mongolia");
+                    _BuyersCountries.Add("MS", "Montserrat");
+                    _BuyersCountries.Add("MA", "Morocco");
+                    _BuyersCountries.Add("MZ", "Mozambique");
+                    _BuyersCountries.Add("NA", "Namibia");
+                    _BuyersCountries.Add("NR", "Nauru");
+                    _BuyersCountries.Add("NP", "Nepal");
+                    _BuyersCountries.Add("NL", "Netherlands");
+                    _BuyersCountries.Add("AN", "Netherlands Antilles");
+                    _BuyersCountries.Add("NC", "New Caledonia");
+                    _BuyersCountries.Add("NZ", "New Zealand");
+                    _BuyersCountries.Add("NI", "Nicaragua");
+                    _BuyersCountries.Add("NE", "Niger");
+                    _BuyersCountries.Add("NU", "Niue");
+                    _BuyersCountries.Add("NF", "Norfolk Island");
+                    _BuyersCountries.Add("NO", "Norway");
+                    _BuyersCountries.Add("OM", "Oman");
+                    _BuyersCountries.Add("PW", "Palau");
+                    _BuyersCountries.Add("PA", "Panama");
+                    _BuyersCountries.Add("PG", "Papua New Guinea");
+                    _BuyersCountries.Add("PE", "Peru");
+                    _BuyersCountries.Add("PH", "Philippines");
+                    _BuyersCountries.Add("PN", "Pitcairn Islands");
+                    _BuyersCountries.Add("PL", "Poland");
+                    _BuyersCountries.Add("PT", "Portugal");
+                    _BuyersCountries.Add("QA", "Qatar");
+                    _BuyersCountries.Add("CG", "Republic of the Congo");
+                    _BuyersCountries.Add("RE", "Reunion");
+                    _BuyersCountries.Add("RO", "Romania");
+                    _BuyersCountries.Add("RU", "Russia");
+                    _BuyersCountries.Add("RW", "Rwanda");
+                    _BuyersCountries.Add("VC", "Saint Vincent and the Grenadines");
+                    _BuyersCountries.Add("WS", "Samoa");
+                    _BuyersCountries.Add("SM", "San Marino");
+                    _BuyersCountries.Add("ST", "São Tomé and Príncipe");
+                    _BuyersCountries.Add("SA", "Saudi Arabia");
+                    _BuyersCountries.Add("SN", "Senegal");
+                    _BuyersCountries.Add("SC", "Seychelles");
+                    _BuyersCountries.Add("SL", "Sierra Leone");
+                    _BuyersCountries.Add("SG", "Singapore");
+                    _BuyersCountries.Add("SK", "Slovakia");
+                    _BuyersCountries.Add("SI", "Slovenia");
+                    _BuyersCountries.Add("SB", "Solomon Islands");
+                    _BuyersCountries.Add("SO", "Somalia");
+                    _BuyersCountries.Add("ZA", "South Africa");
+                    _BuyersCountries.Add("KR", "South Korea");
+                    _BuyersCountries.Add("ES", "Spain");
+                    _BuyersCountries.Add("LK", "Sri Lanka");
+                    _BuyersCountries.Add("SH", "St. Helena");
+                    _BuyersCountries.Add("KN", "St. Kitts and Nevis");
+                    _BuyersCountries.Add("LC", "St. Lucia");
+                    _BuyersCountries.Add("PM", "St. Pierre and Miquelon");
+                    _BuyersCountries.Add("SR", "Suriname");
+                    _BuyersCountries.Add("SJ", "Svalbard and Jan Mayen Islands");
+                    _BuyersCountries.Add("SZ", "Swaziland");
+                    _BuyersCountries.Add("SE", "Sweden");
+                    _BuyersCountries.Add("CH", "Switzerland");
+                    _BuyersCountries.Add("TW", "Taiwan");
+                    _BuyersCountries.Add("TJ", "Tajikistan");
+                    _BuyersCountries.Add("TZ", "Tanzania");
+                    _BuyersCountries.Add("TH", "Thailand");
+                    _BuyersCountries.Add("TG", "Togo");
+                    _BuyersCountries.Add("TO", "Tonga");
+                    _BuyersCountries.Add("TT", "Trinidad and Tobago");
+                    _BuyersCountries.Add("TN", "Tunisia");
+                    _BuyersCountries.Add("TR", "Turkey");
+                    _BuyersCountries.Add("TM", "Turkmenistan");
+                    _BuyersCountries.Add("TC", "Turks and Caicos Islands");
+                    _BuyersCountries.Add("TV", "Tuvalu");
+                    _BuyersCountries.Add("UG", "Uganda");
+                    _BuyersCountries.Add("UA", "Ukraine");
+                    _BuyersCountries.Add("AE", "United Arab Emirates");
+                    _BuyersCountries.Add("US", "United States");
+                    _BuyersCountries.Add("UY", "Uruguay");
+                    _BuyersCountries.Add("VU", "Vanuatu");
+                    _BuyersCountries.Add("VA", "Vatican City State");
+                    _BuyersCountries.Add("VE", "Venezuela");
+                    _BuyersCountries.Add("VN", "Vietnam");
+                    _BuyersCountries.Add("WF", "Wallis and Futuna Islands");
+                    _BuyersCountries.Add("YE", "Yemen");
+                    _BuyersCountries.Add("ZM", "Zambia");
+                }
+                return _BuyersCountries;
+            }
+        }
+
+        private static Dictionary<string, string> _WeightUnits = new Dictionary<string, string>();
+        public static Dictionary<string, string> WeightUnits
+        {
+            get
+            {
+                if (_WeightUnits.Count == 0)
+                {
+                    // Add some elements to the dictionary. There are no 
+                    // duplicate keys, but some of the values are duplicates.
+                    _WeightUnits.Add("Lbs", "Lbs");
+                    _WeightUnits.Add("Kgs", "Kgs");
+
+                }
+                return _WeightUnits;
+            }
+        }
+
+        private static Dictionary<string, string> _ButtonStylesList = new Dictionary<string, string>();
+        public static Dictionary<string, string> ButtonStylesList
+        {
+            get
+            {
+                if (_ButtonStylesList.Count == 0)
+                {
+                    // Add some elements to the dictionary. There are no 
+                    // duplicate keys, but some of the values are duplicates.
+                    _ButtonStylesList.Add("SampleBuyNowButton107x26", "https://www.paypal.com/en_GB/i/btn/btn_buynow_LG.gif");
+                    _ButtonStylesList.Add("SampleBuyNowButton122x47", "https://www.paypal.com/en_GB/i/btn/btn_buynowCC_LG.gif");
+                    _ButtonStylesList.Add("SampleBuyNowButton86x21", "https://www.paypal.com/en_GB/i/btn/btn_buynow_SM.gif");
+                    _ButtonStylesList.Add("SampleBuyPayButton107x26", "https://www.paypal.com/en_GB/i/btn/btn_paynow_LG.gif");
+                    _ButtonStylesList.Add("SampleBuyPayButton122x47", "https://www.paypal.com/en_GB/i/btn/btn_paynowCC_LG.gif");
+                    _ButtonStylesList.Add("SampleBuyPayButton86x21", "https://www.paypal.com/en_GB/i/btn/btn_paynow_SM.gif");
+                }
+                return _ButtonStylesList;
+            }
+        }
+
+        #endregion
+
+        protected override void Render(HtmlTextWriter writer)
+        {
+            //call the base class first
+            base.Render(writer);
+
+            if (!Page.IsPostBack && !Page.IsCallback)
+            {
+                StringBuilder sb = new StringBuilder();
+
+                
+                if (!Convert.ToBoolean(ConfigurationManager.AppSettings["UseSandbox"].ToString()))
+                {
+                    sb.Append("<a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&");
+                }
+                else
+                {
+                    sb.Append("<a href=\"https://www.sandbox.paypal.com/us/cgi-bin/webscr?cmd=_xclick&");
+                }
+                sb.Append(string.Format("business={0}", business.ToString()));
+                sb.Append(string.Format("&item_name={0}", itemname.ToString()));
+
+                if (itemId != null)
+                    sb.Append(string.Format("&item_number={0}", itemId.ToString()));
+
+                sb.Append(string.Format("&amount={0}", amount.ToString()));
+
+                sb.Append(string.Format("&no_shipping=0&no_note=1"));
+                sb.Append(string.Format("&currency_code={0}", currency.ToString()));
+
+                sb.Append(string.Format("&lc=GB&bn=PP%2dBuyNowBF&charset=UTF%2d8\" target=\"_blank\">"));
+
+
+                if (string.IsNullOrEmpty(buttonstyle.ToString()))
+                {
+                    sb.Append(string.Format("{0}</a>", itemname.ToString()));
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(buttonstyleurl))
+                    {
+                        sb.Append(string.Format("<img src=\"{0}\" alt=\"PayPal - The safer, easier way to pay online.\" border=\"0\" />", buttonstyleurl.ToString()));
+                    }
+                    else
+                    {
+                        String buttonStyle = "";
+                        if (ButtonStylesList.TryGetValue(buttonstyle.ToString(), out buttonStyle))
+                            sb.Append(string.Format("<img src=\"{0}\" alt=\"PayPal - The safer, easier way to pay online.\" border=\"0\" />", buttonStyle));
+                        else
+                            sb.Append(string.Format("<img src=\"https://www.paypal.com/en_GB/i/btn/btn_buynow_LG.gif\" alt=\"PayPal - The safer, easier way to pay online.\" border=\"0\" />"));
+                    }
+                        
+                }
+
+                sb.Append(string.Format("</a>"));
+
+                writer.WriteLine(sb.ToString());
+            }
+        }
+
+
+
+
+        protected override void ValidationRules()
+        {
+            AddRule("Business", "Business email is required", string.IsNullOrEmpty(business));
+            AddRule("ItemName", "Item Name must be set", string.IsNullOrEmpty(itemname));
+            AddRule("Price", "Please provide an amount.", amount == 0);
+        }
+    }
+}

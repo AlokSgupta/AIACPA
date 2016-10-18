@@ -1,0 +1,111 @@
+		
+
+	<div class="navbar span12" align="center">
+		<div class="container">
+			<div class="nav-collapse collapse">
+				<ul class="nav pull-right">
+					<li class="active"><a href="eventregistration.html">Register</a></li>
+					<li class="active"><a href="eventregistration.html">Sponsors</a></li>
+					<li class="active"><a href="eventregistration.html">Performers</a></li>
+					<li class="active"><a href="eventregistration.html">Vendors</a></li>
+			</ul>
+			</div>
+		</div>
+	</div>
+	<div class="row span12">
+		<div class="span3">
+			<div class="thumbnail" align="center">
+				<h4>Date and Venue</h4>
+				<div style="background-color:#F6F6F6;" >
+					<div class="row" border=1>
+						<div class="span3" align="left"><b>When:</b> Sunday, March 29th, 2015</div>
+						<div class="span3" align="left"><b>Time:</b> 8:30 AM to 1:00 PM</div>
+						<div class="span3" align="left"><b>Where:</b> Radisson Hotel</div>
+						<div class="span3" align="left"><b>Address:</b> 1150 Camp Hill Bypass, Camp Hill, PA 17011</a></div>
+						<div  id="mapSection" class="span3" align="left">
+								<div id="myMap" style="height:200px">
+								<!-- please edit in (js code which is available in the foote section) longitude and longitude of your location  -->
+								</div>	
+							
+						</div>
+					</div>
+					<br/>
+				</div>
+			</div>
+			<br/>
+			<div class="thumbnail" align="center">
+				<h4>Contact</h4>
+				<div style="background-color:#F6F6F6;" >
+					<div class="row" border=1>
+						<div class="span3" align="left"><b>Virendra Trivedi   @ 717-756-1034 </b></div>
+						
+						
+					</div>
+					<br/>
+				</div>
+			</div>
+			
+
+		</div>
+		<div class="span5">
+			<div class="thumbnail">
+					<div id="myCarousel" class="carousel slide ">
+			            <div class="carousel-inner">
+			                <div  style="text-align:center"  class="item active">
+			                    <div class="wrapper">
+			                    	<img src="Content/Presentations/EducationSeminar2015.png" alt="What we do">
+			                    
+			                    </div>
+			                </div>
+			              
+			               
+			            </div>
+			           
+			        </div>
+			</div>
+		</div>
+		<div class="span3">
+			<div class="thumbnail" align="center">
+				<h4>About the event</h4>
+					<div style="background-color:#F6F6F6;" >
+				 		
+						   India Day is one of the most well attended events in the Harrisburg area where all Asian Indian communities come together to present the rich Indian culture and heritage. Over the past many years, Asian Indian Americans of Central PA (AIACPA) has been organizing this event at the Forum auditorium
+							in Harrisburg attracting audience from all over Central Pennsylvania. India Day has become the most awaited event for our community, organizers, Asian an organizations, participants, sponsors,vendors and our audience. In the past the events have been enthusiastically attended by well-known local, state and national politicians.
+						
+					</div>
+			</div>
+		</div>
+		
+	</div>
+		
+
+
+
+
+
+
+	 <!-- Google map jquery files -->
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<script src="apps/core/js/jquery.gmap.js"></script>
+	<script>
+		// Google map data ==============================================================================
+	  $(document).ready(function(){
+		$("#myMap").gMap({ controls: false,
+						  scrollwheel: false,
+			  draggable: true,
+		  markers: [{ latitude: 40.253248,  		//your company location latitude 
+					  longitude: -76.914818,		//your company location longitude
+					  icon: { image: "http://www.google.com/mapfiles/marker.png",
+							  iconsize: [42, 48],
+							  iconanchor: [42,48],
+							  infowindowanchor: [14, 0] } },
+					],
+		  icon: { image: "http://www.google.com/mapfiles/marker.png", 
+				  iconsize: [28, 48],
+				  iconanchor: [14, 48],
+				  infowindowanchor: [14, 0] },
+		  latitude: 40.253248,
+		  longitude: -76.914818,
+		  zoom: 15, });
+	  });
+	</script>
